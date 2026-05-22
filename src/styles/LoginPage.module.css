@@ -1,0 +1,142 @@
+/* ═══ LOGIN PAGE ═══ */
+.page {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(175deg, #fff 0%, #fff0f5 40%, #fce4f2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 20px;
+  animation: pageIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Decorative orbs ── */
+.orb1 {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(90px);
+  background: radial-gradient(
+    circle,
+    rgba(240, 140, 200, 0.12),
+    transparent 70%
+  );
+  top: 0%;
+  left: -15%;
+  animation: orb-drift 9s ease-in-out infinite;
+}
+
+.orb2 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(90px);
+  background: radial-gradient(
+    circle,
+    rgba(224, 90, 158, 0.08),
+    transparent 65%
+  );
+  bottom: 0%;
+  right: -10%;
+  animation: orb-drift 7s ease-in-out infinite reverse;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  max-width: 340px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--glass-border);
+  border-radius: 32px;
+  padding: 30px 26px 26px;
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  animation: card-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(224, 90, 158, 0.6),
+    transparent
+  );
+  border-radius: 50%;
+}
+
+/* ── Avatar ── */
+.avatar {
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.avatar img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  box-shadow: 0 10px 30px rgba(200, 100, 150, 0.15);
+}
+
+.avatarRing {
+  position: absolute;
+  inset: -4px;
+  border-radius: 24px;
+  background: conic-gradient(
+    var(--pri),
+    var(--pri-glow),
+    var(--pri-soft),
+    var(--pri-mid),
+    var(--pri)
+  );
+  animation: ring-spin 5s linear infinite;
+  z-index: -1;
+  opacity: 0.75;
+}
+
+/* ── Title ── */
+.title {
+  font-family: var(--font-pinyon), "Pinyon Script", cursive;
+  font-size: 1.7rem;
+  color: var(--pri-mid);
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  text-shadow: 0 0 30px rgba(224, 90, 158, 0.2);
+}
+
+/* ── Error ── */
+.error {
+  color: var(--pri-dim);
+  text-align: center;
+  font-size: 0.82rem;
+  height: 22px;
+  margin-top: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  animation: fadeUp 0.3s ease both;
+}
+
+.doShake {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}

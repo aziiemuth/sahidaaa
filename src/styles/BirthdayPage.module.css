@@ -1,0 +1,202 @@
+/* ═══ BIRTHDAY PAGE ═══ */
+.page {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(175deg, #fff 0%, #fff0f5 50%, #fce4f2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  gap: 5px;
+  animation: pageIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--pri);
+  opacity: 0.65;
+  animation: fadeUp 0.8s ease both;
+}
+
+.heading {
+  font-family: var(--font-syne), "Syne", sans-serif;
+  font-size: clamp(2.6rem, 9vw, 5.5rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 0.9;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.name {
+  font-family: var(--font-pinyon), "Pinyon Script", cursive;
+  font-size: clamp(1.5rem, 4.5vw, 2.4rem);
+  color: var(--pri-mid);
+  margin: 6px 0;
+  animation: fadeUp 0.8s 0.4s ease both;
+  text-shadow: 0 0 30px rgba(224, 90, 158, 0.2);
+}
+
+/* ── Cake scene ── */
+.cakeScene {
+  position: relative;
+  width: 190px;
+  height: 210px;
+  margin: 16px auto;
+  animation: fadeUp 0.8s 0.35s ease both;
+}
+
+.ck1,
+.ck2,
+.ck3,
+.ckCream,
+.ckCandle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(-600px);
+  opacity: 0;
+  border-radius: 10px;
+}
+
+.ck1 {
+  width: 165px;
+  height: 32px;
+  bottom: 0;
+  background: linear-gradient(90deg, #f8b8e0, #d888c0);
+  box-shadow: 0 5px 0 #d066b0;
+}
+
+.ck2 {
+  width: 145px;
+  height: 28px;
+  bottom: 36px;
+  background: linear-gradient(90deg, #eec8d8, #d8a8c8);
+  box-shadow: 0 5px 0 #c898b8;
+}
+
+.ck3 {
+  width: 125px;
+  height: 25px;
+  bottom: 68px;
+  background: linear-gradient(90deg, #ffd8e8, #f0b8d8);
+  box-shadow: 0 4px 0 #e0a8c8;
+}
+
+.ckCream {
+  width: 135px;
+  height: 18px;
+  bottom: 97px;
+  background: linear-gradient(90deg, #fff0f8, #ffe8f0);
+  border-radius: 12px 12px 5px 5px;
+  box-shadow: 0 4px 0 #e8d0e0;
+}
+
+.ckCandle {
+  width: 12px;
+  height: 45px;
+  bottom: 121px;
+  background: linear-gradient(#ffb0c0, #ffd8e0);
+  border-radius: 5px 5px 2px 2px;
+  box-shadow: 0 0 8px rgba(255, 120, 140, 0.4);
+}
+
+.drop {
+  animation: dropCk 0.65s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* ── Flame ── */
+.flame {
+  position: absolute;
+  bottom: 174px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.flameVisible {
+  opacity: 1;
+}
+
+.flameGlow {
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 170, 0, 0.45) 0%,
+    transparent 65%
+  );
+  border-radius: 50%;
+  animation: flicker 0.4s ease-in-out infinite alternate-reverse;
+}
+
+.flameInner {
+  width: 12px;
+  height: 20px;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    #fffde7,
+    #ffb300 45%,
+    #ff6f00
+  );
+  border-radius: 50% 50% 35% 35%;
+  margin: auto;
+  animation: flicker 0.35s ease-in-out infinite alternate;
+}
+
+/* ── Go button ── */
+.goBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 34px;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(135deg, var(--pri), var(--pri-dim));
+  color: white;
+  font-family: var(--font-syne), "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(224, 90, 158, 0.4);
+  transition: all 0.28s;
+  letter-spacing: 0.3px;
+  margin-top: 22px;
+}
+
+.goBtn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 16px 40px rgba(224, 90, 158, 0.55);
+  filter: brightness(1.05);
+}
+
+@keyframes dropCk {
+  0% {
+    transform: translateX(-50%) translateY(-600px);
+    opacity: 0;
+  }
+  65% {
+    transform: translateX(-50%) translateY(9px);
+    opacity: 1;
+  }
+  85% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flicker {
+  from {
+    transform: scaleX(1) scaleY(1);
+  }
+  to {
+    transform: scaleX(0.82) scaleY(1.09);
+  }
+}

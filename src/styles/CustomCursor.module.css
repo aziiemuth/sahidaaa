@@ -1,0 +1,35 @@
+/* ═══ CUSTOM CURSOR ═══ */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--pri-glow);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, opacity 0.2s, background 0.2s;
+  mix-blend-mode: lighten;
+  opacity: 0.9;
+}
+
+.ring {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(224, 90, 158, 0.35);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, opacity 0.3s;
+  opacity: 0.7;
+}
+
+/* Hide on touch devices */
+@media (hover: none) {
+  .cursor,
+  .ring {
+    display: none;
+  }
+}

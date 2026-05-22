@@ -1,0 +1,131 @@
+/* ═══ SHARED UI COMPONENT STYLES ═══ */
+
+/* ── NumPad ── */
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.numKey {
+  border: none;
+  border-radius: 16px;
+  padding: 16px 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: var(--font-dm), "DM Sans", sans-serif;
+  background: rgba(224, 90, 158, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(224, 90, 158, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.numKey:hover {
+  background: rgba(224, 90, 158, 0.12);
+  border-color: rgba(224, 90, 158, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 100, 150, 0.1);
+}
+
+.numKey:active {
+  transform: scale(0.92);
+  background: rgba(224, 90, 158, 0.18);
+}
+
+.numKeyOk {
+  background: linear-gradient(135deg, var(--pri), var(--pri-dim));
+  color: white;
+  font-weight: 700;
+  border-color: transparent;
+  box-shadow: 0 4px 20px rgba(224, 90, 158, 0.35);
+}
+
+.numKeyOk:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(224, 90, 158, 0.5);
+}
+
+.numKeyDel {
+  background: rgba(224, 90, 158, 0.05);
+  color: var(--text-dim);
+  border-color: rgba(224, 90, 158, 0.1);
+}
+
+.numKeyDel:hover {
+  background: rgba(224, 90, 158, 0.12);
+}
+
+/* ── Pin Dots ── */
+.pinDots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  height: 20px;
+  align-items: center;
+}
+
+.pinDot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid rgba(224, 90, 158, 0.3);
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.pinDotFilled {
+  background: var(--pri);
+  border-color: var(--pri);
+  box-shadow: 0 0 12px rgba(224, 90, 158, 0.6),
+    0 0 24px rgba(224, 90, 158, 0.2);
+  transform: scale(1.2);
+}
+
+.pinDotFilled::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(224, 90, 158, 0.4);
+  animation: dot-ripple 0.5s ease-out both;
+}
+
+.pinDotsError {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* ── Equalizer ── */
+.eqBar {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--pri);
+  animation: eq-dance var(--d, 0.4s) ease-in-out infinite alternate;
+}
+
+/* ── Slide Overlay ── */
+.slideOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 19;
+  background: rgba(252, 224, 240, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slideOverlayVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
