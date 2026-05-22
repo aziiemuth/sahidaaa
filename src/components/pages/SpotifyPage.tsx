@@ -9,6 +9,7 @@ import {
   faPause,
   faForwardStep,
   faRepeat,
+  faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import VinylDisc from "@/components/ui/VinylDisc";
 import Equalizer from "@/components/ui/Equalizer";
@@ -18,14 +19,23 @@ import styles from "@/styles/SpotifyPage.module.css";
 
 interface SpotifyPageProps {
   onFinish: () => void;
+  isPlaying: boolean;
+  onToggleAudio: () => void;
 }
 
-export default function SpotifyPage({ onFinish }: SpotifyPageProps) {
+export default function SpotifyPage({ onFinish, isPlaying, onToggleAudio }: SpotifyPageProps) {
   const [elapsed, setElapsed] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    // Timer counting seconds
+    if (!isPlaying) {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      return;
+    }
+
     timerRef.current = setInterval(() => {
       setElapsed((prev) => prev + 1);
     }, 1000);
@@ -33,14 +43,17 @@ export default function SpotifyPage({ onFinish }: SpotifyPageProps) {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, []);
+  }, [isPlaying]);
+
+  const SONG_DURATION = 223; // 3m 43s in seconds
+  const percent = Math.min((elapsed / SONG_DURATION) * 100, 100);
 
   return (
     <section className={styles.page}>
       <div className={styles.orb1} />
       <div className={styles.orb2} />
 
-      <VinylDisc spinning />
+      <VinylDisc spinning={isPlaying} />
 
       <p className={styles.nowLabel}>
         <FontAwesomeIcon icon={faCirclePlay} /> Sekarang Lagi Memutar
@@ -48,7 +61,7 @@ export default function SpotifyPage({ onFinish }: SpotifyPageProps) {
       <p className={styles.songTitle}>{MUSIC_TITLE}</p>
       <p className={styles.artist}>{MUSIC_ARTIST}</p>
 
-      {/* Controls (decorative) */}
+      {/* Controls */}
       <div className={styles.controls}>
         <button className={styles.ctrlBtn}>
           <FontAwesomeIcon icon={faShuffle} />
@@ -56,8 +69,8 @@ export default function SpotifyPage({ onFinish }: SpotifyPageProps) {
         <button className={styles.ctrlBtn}>
           <FontAwesomeIcon icon={faBackwardStep} />
         </button>
-        <button className={styles.playBtn}>
-          <FontAwesomeIcon icon={faPause} />
+        <button className={styles.playBtn} onClick={onToggleAudio}>
+          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
         </button>
         <button className={styles.ctrlBtn}>
           <FontAwesomeIcon icon={faForwardStep} />
@@ -74,7 +87,7 @@ export default function SpotifyPage({ onFinish }: SpotifyPageProps) {
           <span>{formatTime(elapsed)}</span>
         </div>
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} />
+          <div className={styles.progressFill} style={{ width: `${percent}%` }} />
         </div>
         <div className={styles.timeRow}>
           <span></span>
@@ -84,7 +97,7 @@ export default function SpotifyPage({ onFinish }: SpotifyPageProps) {
 
       {/* Equalizer */}
       <div className={styles.eqWrap}>
-        <Equalizer barCount={10} />
+        <Equalizer barCount={10} isPlaying={isPlaying} />
       </div>
 
       {/* Skip button */}

@@ -2,6 +2,7 @@ import styles from "@/styles/components.module.css";
 
 interface EqualizerProps {
   barCount: number;
+  isPlaying?: boolean;
 }
 
 const DURATIONS = [
@@ -17,13 +18,13 @@ const DURATIONS = [
   "0.6s",
 ];
 
-export default function Equalizer({ barCount }: EqualizerProps) {
+export default function Equalizer({ barCount, isPlaying = true }: EqualizerProps) {
   return (
     <>
       {Array.from({ length: barCount }, (_, i) => (
         <div
           key={i}
-          className={styles.eqBar}
+          className={`${styles.eqBar} ${!isPlaying ? styles.eqBarPaused : ""}`}
           style={
             {
               "--d": DURATIONS[i % DURATIONS.length],

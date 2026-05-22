@@ -112,6 +112,10 @@
   animation: eq-dance var(--d, 0.4s) ease-in-out infinite alternate;
 }
 
+.eqBarPaused {
+  animation-play-state: paused !important;
+}
+
 /* ── Slide Overlay ── */
 .slideOverlay {
   position: fixed;

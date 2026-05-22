@@ -86,8 +86,13 @@
   background: linear-gradient(to bottom, #ccc, #999);
   border-radius: 2px;
   transform-origin: top center;
-  transform: rotate(25deg);
+  transform: rotate(10deg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.needlePlaying {
+  transform: rotate(25deg);
 }
 
 .needle::after {
@@ -197,7 +202,7 @@
   background: var(--pri);
   border-radius: 3px;
   width: 0;
-  animation: sp-progress 5s linear forwards;
+  transition: width 1s linear;
 }
 
 /* ── Equalizer ── */

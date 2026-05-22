@@ -37,6 +37,10 @@ export default function LoginPage({ onSuccess }: LoginPageProps) {
     [pin]
   );
 
+  const handleDelete = useCallback(() => {
+    setPin((prev) => prev.slice(0, -1));
+  }, []);
+
   return (
     <section className={styles.page}>
       {/* Orbs */}
@@ -59,7 +63,7 @@ export default function LoginPage({ onSuccess }: LoginPageProps) {
         {/* Numpad */}
         <NumPad
           onKey={handleKey}
-          onClear={() => setPin("")}
+          onClear={handleDelete}
           onSubmit={() => checkPin(pin)}
         />
 

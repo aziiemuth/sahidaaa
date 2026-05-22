@@ -44,7 +44,11 @@ export default function BirthdayApp() {
         <QuizPage onComplete={handleQuizComplete} />
       )}
       {currentPage === "spotify" && (
-        <SpotifyPage onFinish={() => setCurrentPage("birthday")} />
+        <SpotifyPage
+          onFinish={() => setCurrentPage("birthday")}
+          isPlaying={isPlaying}
+          onToggleAudio={toggle}
+        />
       )}
       {currentPage === "birthday" && (
         <BirthdayPage onEnter={() => setCurrentPage("main")} />

@@ -17,7 +17,7 @@ export default function VinylDisc({ spinning = true }: VinylDiscProps) {
           <FontAwesomeIcon icon={faMusic} />
         </div>
       </div>
-      <div className={styles.needle} />
+      <div className={`${styles.needle} ${spinning ? styles.needlePlaying : ""}`} />
     </div>
   );
 }
