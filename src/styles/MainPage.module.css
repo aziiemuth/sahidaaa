@@ -344,18 +344,6 @@
   object-fit: cover;
 }
 
-.mpVinylMarker {
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.4);
-}
-
 .mpInfo {
   flex: 1;
   min-width: 0;
