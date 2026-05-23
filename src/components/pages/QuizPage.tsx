@@ -17,19 +17,28 @@ export default function QuizPage({ onComplete }: QuizPageProps) {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [isExiting, setIsExiting] = useState(false);
 
   const handleAnswer = useCallback(
     (index: number) => {
       setSelectedOption(index);
       setScore((prev) => prev + 1);
+      
+      // Wait for user to see the picked option (600ms)
       setTimeout(() => {
-        setSelectedOption(null);
-        if (currentQ + 1 >= QUIZ_QUESTIONS.length) {
-          setShowResult(true);
-        } else {
-          setCurrentQ((prev) => prev + 1);
-        }
-      }, 720);
+        setIsExiting(true);
+        
+        // Wait for exit slide animation to complete (300ms)
+        setTimeout(() => {
+          setSelectedOption(null);
+          setIsExiting(false);
+          if (currentQ + 1 >= QUIZ_QUESTIONS.length) {
+            setShowResult(true);
+          } else {
+            setCurrentQ((prev) => prev + 1);
+          }
+        }, 300);
+      }, 600);
     },
     [currentQ]
   );
@@ -61,7 +70,10 @@ export default function QuizPage({ onComplete }: QuizPageProps) {
         </div>
 
         {/* Quiz card */}
-        <div className={styles.quizCard}>
+        <div
+          className={`${styles.quizCard} ${isExiting ? styles.slideOut : styles.slideIn}`}
+          key={showResult ? "result" : currentQ}
+        >
           {!showResult ? (
             <QuizCard
               icon={q.icon}

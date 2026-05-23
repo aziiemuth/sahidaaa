@@ -140,27 +140,37 @@
   transition: all 0.22s;
 }
 
-.qOption:hover {
+.qOption:not(:disabled):hover {
   background: rgba(224, 90, 158, 0.08);
   border-color: var(--pri-mid);
   transform: translateX(5px);
 }
 
-.qOption:hover .qOptionLetter {
+.qOption:not(:disabled):hover .qOptionLetter {
   background: var(--pri-mid);
   color: white;
   border-color: var(--pri);
 }
 
 .picked {
-  background: rgba(224, 90, 158, 0.15);
-  border-color: var(--pri);
+  background: rgba(224, 90, 158, 0.15) !important;
+  border-color: var(--pri) !important;
 }
 
 .picked .qOptionLetter {
-  background: var(--pri);
-  color: white;
+  background: var(--pri) !important;
+  color: white !important;
 }
+
+.qOption:disabled {
+  cursor: default;
+}
+
+.qOption:disabled:not(.picked) {
+  opacity: 0.45;
+  transform: none;
+}
+
 
 /* ── Result ── */
 .resultWrap {
@@ -241,3 +251,35 @@
   opacity: 0.25;
   margin-top: 4px;
 }
+
+/* ── Transitions for Quiz Cards ── */
+.slideIn {
+  animation: qSlideIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.slideOut {
+  animation: qSlideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes qSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes qSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.95);
+  }
+}
+
