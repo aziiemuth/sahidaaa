@@ -34,6 +34,7 @@ export default function MiniPlayer({ isPlaying, onToggle }: MiniPlayerProps) {
               className={styles.mpVinylDotImage}
             />
           </div>
+          <div className={styles.mpVinylMarker} />
         </div>
         <div className={styles.mpInfo}>
           <div className={styles.mpSong}>{MUSIC_TITLE} — {MUSIC_ARTIST}</div>
