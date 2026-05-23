@@ -23,6 +23,7 @@ export default function VinylDisc({ spinning = true }: VinylDiscProps) {
           />
         </div>
       </div>
+      <div className={styles.discShine} />
       <div className={`${styles.needle} ${spinning ? styles.needlePlaying : ""}`} />
     </div>
   );

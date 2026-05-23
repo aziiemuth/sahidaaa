@@ -49,15 +49,38 @@
   border-radius: 50%;
   background: conic-gradient(
     #fce4f2 0deg,
-    #f8d8ea 90deg,
+    #f08cc8 90deg,
     #fce4f2 180deg,
-    #f4cce4 270deg,
+    #e05a9e 270deg,
     #fce4f2 360deg
   );
   border: 3px solid rgba(224, 90, 158, 0.22);
   box-shadow: 0 20px 60px rgba(200, 100, 150, 0.3);
   animation: spin-vinyl 4s linear infinite;
   position: relative;
+}
+
+.discShine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 45deg,
+    rgba(255, 255, 255, 0.25) 0deg,
+    rgba(255, 255, 255, 0) 60deg,
+    rgba(255, 255, 255, 0.05) 120deg,
+    rgba(255, 255, 255, 0) 160deg,
+    rgba(255, 255, 255, 0.25) 180deg,
+    rgba(255, 255, 255, 0) 240deg,
+    rgba(255, 255, 255, 0.05) 300deg,
+    rgba(255, 255, 255, 0) 340deg,
+    rgba(255, 255, 255, 0.25) 360deg
+  );
+  pointer-events: none;
+  z-index: 2;
 }
 
 .discCenter {
@@ -76,6 +99,7 @@
   color: white;
   box-shadow: 0 0 0 5px #fff, 0 0 20px rgba(224, 90, 158, 0.4);
   overflow: hidden;
+  z-index: 1;
 }
 
 .discCenterImage {
@@ -96,6 +120,7 @@
   transform: rotate(10deg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 3;
 }
 
 .needlePlaying {
