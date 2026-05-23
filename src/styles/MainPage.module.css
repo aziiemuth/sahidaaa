@@ -546,3 +546,23 @@
 .ncGallery {
   --nc-clr: rgba(155, 89, 182, 0.1);
 }
+
+@keyframes spin-vinyl {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
