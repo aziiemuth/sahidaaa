@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMusic } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 import styles from "@/styles/SpotifyPage.module.css";
 
 interface VinylDiscProps {
@@ -14,10 +13,18 @@ export default function VinylDisc({ spinning = true }: VinylDiscProps) {
         style={!spinning ? { animationPlayState: "paused" } : {}}
       >
         <div className={styles.discCenter}>
-          <FontAwesomeIcon icon={faMusic} />
+          <Image
+            src="/images/amr diab.jpg"
+            alt="Amr Diab"
+            width={60}
+            height={60}
+            className={styles.discCenterImage}
+            priority
+          />
         </div>
       </div>
       <div className={`${styles.needle} ${spinning ? styles.needlePlaying : ""}`} />
     </div>
   );
 }
+

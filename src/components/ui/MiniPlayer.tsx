@@ -7,6 +7,7 @@ import {
   faHeadphones,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 import styles from "@/styles/MainPage.module.css";
 import { MUSIC_TITLE, MUSIC_ARTIST } from "@/lib/constants";
 
@@ -24,7 +25,15 @@ export default function MiniPlayer({ isPlaying, onToggle }: MiniPlayerProps) {
         <div
           className={`${styles.mpVinyl} ${isPlaying ? styles.mpVinylSpinning : ""}`}
         >
-          <div className={styles.mpVinylDot} />
+          <div className={styles.mpVinylDot}>
+            <Image
+              src="/images/amr diab.jpg"
+              alt="Amr Diab"
+              width={20}
+              height={20}
+              className={styles.mpVinylDotImage}
+            />
+          </div>
         </div>
         <div className={styles.mpInfo}>
           <div className={styles.mpSong}>{MUSIC_TITLE} — {MUSIC_ARTIST}</div>
