@@ -1,5 +1,5 @@
 export const PIN_CODE = "0306";
-export const MUSIC_TITLE = "Tamally Maak";
+export const MUSIC_TITLE = "Tamally Ma'ak";
 export const MUSIC_ARTIST = "Amr Diab";
 
 export const QUIZ_QUESTIONS = [
