@@ -306,15 +306,19 @@
   border-radius: 50%;
   flex-shrink: 0;
   background: conic-gradient(
-    #fce4f2 0deg,
-    #f8d8ea 90deg,
-    #fce4f2 180deg,
-    #f4cce4 270deg,
-    #fce4f2 360deg
+    #181818 0deg,
+    #3a3a3a 40deg,
+    #555555 45deg,
+    #3a3a3a 50deg,
+    #181818 180deg,
+    #3a3a3a 220deg,
+    #555555 225deg,
+    #3a3a3a 230deg,
+    #181818 360deg
   );
-  border: 3px solid rgba(224, 90, 158, 0.2);
+  border: 2px solid #222;
   position: relative;
-  box-shadow: 0 4px 14px rgba(200, 100, 150, 0.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .mpVinylSpinning {

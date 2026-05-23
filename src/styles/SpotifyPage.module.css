@@ -47,15 +47,26 @@
   width: 175px;
   height: 175px;
   border-radius: 50%;
-  background: conic-gradient(
-    #fce4f2 0deg,
-    #f08cc8 90deg,
-    #fce4f2 180deg,
-    #e05a9e 270deg,
-    #fce4f2 360deg
-  );
-  border: 3px solid rgba(224, 90, 158, 0.22);
-  box-shadow: 0 20px 60px rgba(200, 100, 150, 0.3);
+  background: 
+    radial-gradient(circle, transparent 35%, rgba(255, 255, 255, 0.05) 35.5%, transparent 36%,
+                            transparent 45%, rgba(255, 255, 255, 0.05) 45.5%, transparent 46%,
+                            transparent 55%, rgba(255, 255, 255, 0.05) 55.5%, transparent 56%,
+                            transparent 65%, rgba(255, 255, 255, 0.05) 65.5%, transparent 66%,
+                            transparent 75%, rgba(255, 255, 255, 0.05) 75.5%, transparent 76%,
+                            transparent 85%, rgba(255, 255, 255, 0.05) 85.5%, transparent 86%),
+    conic-gradient(
+      #181818 0deg,
+      #3a3a3a 40deg,
+      #555555 45deg,
+      #3a3a3a 50deg,
+      #181818 180deg,
+      #3a3a3a 220deg,
+      #555555 225deg,
+      #3a3a3a 230deg,
+      #181818 360deg
+    );
+  border: 4px solid #222;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.05);
   animation: spin-vinyl 4s linear infinite;
   position: relative;
 }
