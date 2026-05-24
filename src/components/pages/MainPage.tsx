@@ -9,6 +9,7 @@ import StatsRow from "@/components/ui/StatsRow";
 import MiniPlayer from "@/components/ui/MiniPlayer";
 import NavCard from "@/components/ui/NavCard";
 import styles from "@/styles/MainPage.module.css";
+import { REPLY_TEXT } from "@/lib/constants";
 
 interface MainPageProps {
   onOpenSlide: (slide: "letter" | "gallery") => void;
@@ -64,6 +65,17 @@ export default function MainPage({ onOpenSlide, isPlaying, onToggleAudio }: Main
               subtitle="Momen indah kita berdua"
               color="purple"
               onClick={() => onOpenSlide("gallery")}
+            />
+            <NavCard
+              icon="paper-plane"
+              title="Kirim Surat Balik"
+              subtitle="Kirim pesan langsung ke WhatsApp Athif"
+              color="green"
+              isFullWidth={true}
+              onClick={() => {
+                const url = `https://wa.me/62816234185?text=${encodeURIComponent(REPLY_TEXT)}`;
+                window.open(url, "_blank");
+              }}
             />
           </div>
         </div>

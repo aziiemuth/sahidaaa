@@ -535,6 +535,24 @@
   --nc-clr: rgba(155, 89, 182, 0.1);
 }
 
+.ncIconGreen {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+}
+
+.ncWhatsapp {
+  --nc-clr: rgba(37, 211, 102, 0.1);
+}
+
+.navCardFull {
+  grid-column: span 2;
+}
+
+@media (max-width: 380px) {
+  .navCardFull {
+    grid-column: span 1;
+  }
+}
+
 @keyframes spin-vinyl {
   from {
     transform: rotate(0deg);

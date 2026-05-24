@@ -97,10 +97,12 @@ di umurmu yang baru ini, aku doakan semua mimpi-mimpimu tercapai, semoga allah s
 
 aku janji akan selalu berusaha jadi yang terbaik untukmu.
 
-selamat ulang tahun, sahida! 🎉
+selamat ulang tahun, babe! 🎉
 love you more than words can say 💕
 
-— athif, yang selalu sayang kamu ♡`;
+— athif, yang selalu sayang kauu setiap saat ♡`;
+
+export const REPLY_TEXT = "Halo Babe! Aku udah baca surat spesial dari kamu di website. Makasih banyak yaa atas ucapan dan kejutannya, aku seneng banget! Love you too 💕";
 
 export type FrameType = "polaroid" | "ornate" | "glass" | "tape" | "heart";
 
