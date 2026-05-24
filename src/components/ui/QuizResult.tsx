@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrophy, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { RESULT_COMMENTS } from "@/lib/constants";
@@ -16,8 +17,16 @@ export default function QuizResult({
   total,
   onContinue,
 }: QuizResultProps) {
-  // Menggunakan score secara deterministik untuk menghindari error hidrasi dan linter
-  const comment = RESULT_COMMENTS[score % RESULT_COMMENTS.length];
+  // Menggunakan useState dan useEffect untuk randomisasi di client-side guna menghindari error hidrasi
+  const [comment, setComment] = useState(
+    RESULT_COMMENTS[score % RESULT_COMMENTS.length]
+  );
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * RESULT_COMMENTS.length);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setComment(RESULT_COMMENTS[randomIndex]);
+  }, [score]);
 
   return (
     <div className={styles.resultWrap}>
