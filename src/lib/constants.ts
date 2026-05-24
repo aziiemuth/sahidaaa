@@ -93,8 +93,21 @@ berhubung kita lagi LDR-an, kamu hari ini beruntung banget ya karena bebas omela
 
 walaupun jarak kita jauh dan rindu ini kadang menyiksa, aku bersyukur banget punya kamu. makasih ya udah sabar banget ngadepin aku yang juga ga kalah nyebelin ini. kamu adalah tempat pulang terbaikku, meskipun sekarang pulangnya masih virtual. semoga jarak di antara kita cepet ditiadakan ya, biar kita ga perlu pacaran sama layar HP terus.
 
+di kejauhan sini, dengarlah lirik ini:
+"Dengar laraku
+Suara hati ini memanggil namamu
+Karena separuh aku
+Menyentuh laramu
+Semua lukamu telah menjadi lirihku
+Karena separuh aku
+Dirimu"
+
+Cieee... dibaca ya sayang! Liriknya dalem banget kan? Tapi beneran, karena separuh aku itu emang ada di kamu.
+
 happy birthday, pacarkuhhh yang paling gemesin! 🎉
 i love you more than all the kilometers between us 💕
+
+
 
 — athif, yang selalu kangen dan sayang kamu setiap detik nyaaa ♡`;
 
