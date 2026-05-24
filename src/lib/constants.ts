@@ -85,22 +85,24 @@ export const RESULT_COMMENTS = [
   "Kamu tuh spesial, jangan lupa itu ya!",
 ];
 
-export const LETTER_TEXT = `selamat ulang tahun sayang! 🎂✨
+export const LETTER_TEXT = `happy birthday sayang! 🎂✨
 
-hari ini adalah hari yang paling spesial karena di hari ini, dunia dihadiahin orang yang paling berarti buatku — kamu, sahida.
+selamat ulang tahun buat orang yang paling ngeselin, paling keras kepala, paling suka bikin gemes, tapi anehnya juga orang yang paling aku sayang setengah mati. iya, siapa lagi kalau bukan pacar aku satu-satunya ini, sahida.
 
-aku nggak pernah bosan bersyukur karena allah mempertemukan kita. setiap hari bersamamu terasa seperti hadiah. kamu adalah alasan senyumku, semangat pagiku, dan bintang di malamku.
+berhubung kita lagi LDR-an, kamu hari ini beruntung banget ya karena bebas dari cubitan maut di pipi chubbymu itu dan pelukan eratku yang bikin kamu protes pengap. tapi jangan senang dulu! catat baik-baik ya, semua itu bakal diakumulasikan dan langsung dirapel tanpa ampun pas kita ketemu nanti, pokoknya awas aja sampai kabur! agak menyebalkan emang kalau dipikir-pikir, di hari spesialmu ini aku cuma bisa mandangin kamu lewat layar HP, ngirim chat panjang lebar, dan bikin website sederhana ini (tapi ini bikinnya pakai cinta lho, jadi wajib hukumnya buat bilang keren dan aesthetic ya! awas kalau ga dipuji!).
 
-terima kasih sudah selalu ada, selalu sabar, selalu jadi tempat pulang yang paling nyaman. kamu tuh luar biasa — lebih dari yang kamu sadari.
+jujur, LDR itu ga mudah sama sekali. kadang ada masanya aku ngerasa kesel sendiri karena ga bisa ada di samping kamu pas kamu lagi capek, pas kamu butuh temen jalan, atau pas kamu lagi pengen dimanjain. rasanya pengen banget tiba-tiba teleport ke tempatmu terus ngajak kamu kulineran sampai kenyang. tapi di balik semua jarak yang menyiksa ini, aku ga pernah menyesal sedikit pun. karena sejauh apa pun jarak kita sekarang, perasaan aku ke kamu ga berkurang semili pun. malah makin hari makin bertambah (kayak tagihan listrik, tapi ini versi sayangnya).
 
-di umurmu yang baru ini, aku doakan semua mimpi-mimpimu tercapai, semoga allah selalu menjagamu, memberkahimu, dan membahagiakanmu — lebih dari yang bisa aku berikan.
+makasih ya, sayang. makasih udah sabar banget ngadepin aku yang kadang juga ga kalah nyebelin, suka overthink, atau kadang kurang peka. makasih udah selalu jadi penyemangat terbaikku, jadi orang pertama yang aku cari pas lagi seneng maupun susah, dan tetap bertahan sejauh ini meskipun kita cuma bisa pacaran lewat sinyal internet. setiap kali denger ketawa kamu di telepon, atau ngeliat muka kamu pas video call (terutama pas kamu lagi cemberut atau ngantuk-ngantuk gemes), rasanya semua rasa capek aku langsung ilang gitu aja. kamu itu tempat pulang terbaikku, meskipun sekarang pulangnya masih harus lewat ketikan layar dan suara.
 
-aku janji akan selalu berusaha jadi yang terbaik untukmu.
+di umurmu yang baru ini, doaku ga pernah putus untukmu. semoga kamu selalu diberikan kesehatan, dilindungi di setiap langkahmu, dilancarkan segala urusan dan cita-citamu, serta didekatkan dengan segala hal yang baik. dan yang paling penting: semoga tingkat kesabaranmu ngadepin sifat absurdku bertambah 1000% ya! hehe. satu lagi, semoga rencana-rencana kita ke depan dilancarkan allah swt, biar jarak di antara kita cepet ditiadakan, dan kita ga perlu lagi pacaran virtual kayak gini.
 
-selamat ulang tahun, babe! 🎉
-love you more than words can say 💕
+aku janji akan terus berjuang, belajar jadi orang yang lebih baik lagi buat kamu, dan berusaha semaksimal mungkin biar masa depan yang sering kita obrolin bareng-bareng itu bisa cepet terwujud. tetep jadi sahida yang aku kenal yaa—yang meskipun kadang suka ngambek ga jelas, tapi hatinya luar biasa baik dan tulus banget.
 
-— athif, yang selalu sayang kauu setiap saat ♡`;
+happy birthday, pacarkuhhh yang paling gemesin! 🎉
+i love you more than all the kilometers between us 💕
+
+— athif, yang selalu kangen dan sayang kamu setiap detik nyaa ♡`;
 
 export const REPLY_TEXT = "Halo Babe! Aku udah baca surat spesial dari kamu di website. Makasih banyak yaa atas ucapan dan kejutannya, aku seneng banget! Love you too 💕";
 
