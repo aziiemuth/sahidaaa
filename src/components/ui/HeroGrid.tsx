@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHourglass } from "@fortawesome/free-regular-svg-icons";
 import styles from "@/styles/MainPage.module.css";
+import Lightbox from "@/components/ui/Lightbox";
 
 interface HeroGridProps {
   imageSrc: string;
@@ -28,20 +30,23 @@ export default function HeroGrid({
   name,
   countdown,
 }: HeroGridProps) {
+  const [showLightbox, setShowLightbox] = useState(false);
+
   return (
-    <div className={styles.heroGrid}>
-      <div className={styles.heroMedia}>
-        <div className={styles.heroMediaInner}>
-          <Image
-            src={imageSrc}
-            alt={`Foto ${name}`}
-            width={220}
-            height={220}
-            className={styles.heroImage}
-            priority
-          />
+    <>
+      <div className={styles.heroGrid}>
+        <div className={styles.heroMedia}>
+          <div className={styles.heroMediaInner} onClick={() => setShowLightbox(true)}>
+            <Image
+              src={imageSrc}
+              alt={`Foto ${name}`}
+              width={220}
+              height={220}
+              className={styles.heroImage}
+              priority
+            />
+          </div>
         </div>
-      </div>
       <div className={styles.heroInfo}>
         <p className={styles.heroGreeting}>
           <FontAwesomeIcon icon={faWandSparkles} /> Happy Birthday
@@ -80,5 +85,9 @@ export default function HeroGrid({
         <p className={styles.dobTag}>📅 3 Juni 2006</p>
       </div>
     </div>
+    {showLightbox && (
+      <Lightbox src={imageSrc} onClose={() => setShowLightbox(false)} />
+    )}
+    </>
   );
 }
