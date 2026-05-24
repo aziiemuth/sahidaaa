@@ -1,6 +1,32 @@
 export const PIN_CODE = "0306";
-export const MUSIC_TITLE = "Tamally Ma'ak";
-export const MUSIC_ARTIST = "Amr Diab";
+
+export interface Song {
+  title: string;
+  artist: string;
+  src: string;
+  cover: string;
+  duration: number; // in seconds
+}
+
+export const SONGS: Song[] = [
+  {
+    title: "Tamally Ma'ak",
+    artist: "Amr Diab",
+    src: "/audio/background-music.mp3",
+    cover: "/images/amr diab.jpg",
+    duration: 223,
+  },
+  {
+    title: "Separuh Aku",
+    artist: "NOAH",
+    src: "/audio/background-music2.mp3",
+    cover: "/images/noah.jpg",
+    duration: 268,
+  },
+];
+
+export const MUSIC_TITLE = SONGS[0].title;
+export const MUSIC_ARTIST = SONGS[0].artist;
 
 export const QUIZ_QUESTIONS = [
   {

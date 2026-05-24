@@ -21,7 +21,7 @@ export default function BirthdayApp() {
   const [activeSlide, setActiveSlide] = useState<Slide>(null);
   
   // Lift audio state up so it can start exactly when SpotifyPage is shown
-  const { isPlaying, toggle, play } = useAudio("/audio/background-music.mp3");
+  const { currentSong, isPlaying, toggle, play, next, prev } = useAudio();
 
   const handleQuizComplete = () => {
     play(); // Start audio immediately on click interaction
@@ -48,6 +48,9 @@ export default function BirthdayApp() {
           onFinish={() => setCurrentPage("birthday")}
           isPlaying={isPlaying}
           onToggleAudio={toggle}
+          currentSong={currentSong}
+          onNextSong={next}
+          onPrevSong={prev}
         />
       )}
       {currentPage === "birthday" && (
@@ -58,6 +61,7 @@ export default function BirthdayApp() {
           onOpenSlide={(slide) => setActiveSlide(slide)} 
           isPlaying={isPlaying}
           onToggleAudio={toggle}
+          currentSong={currentSong}
         />
       )}
 

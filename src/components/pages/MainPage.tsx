@@ -9,15 +9,21 @@ import StatsRow from "@/components/ui/StatsRow";
 import MiniPlayer from "@/components/ui/MiniPlayer";
 import NavCard from "@/components/ui/NavCard";
 import styles from "@/styles/MainPage.module.css";
-import { REPLY_TEXT } from "@/lib/constants";
+import { REPLY_TEXT, Song } from "@/lib/constants";
 
 interface MainPageProps {
   onOpenSlide: (slide: "letter" | "gallery") => void;
   isPlaying: boolean;
   onToggleAudio: () => void;
+  currentSong: Song;
 }
 
-export default function MainPage({ onOpenSlide, isPlaying, onToggleAudio }: MainPageProps) {
+export default function MainPage({
+  onOpenSlide,
+  isPlaying,
+  onToggleAudio,
+  currentSong,
+}: MainPageProps) {
   const { days, hours, minutes, seconds, age, isBirthday } =
     useCountdown("2006-06-03");
 
@@ -46,7 +52,11 @@ export default function MainPage({ onOpenSlide, isPlaying, onToggleAudio }: Main
         <StatsRow age={age} />
 
         {/* Mini Player */}
-        <MiniPlayer isPlaying={isPlaying} onToggle={onToggleAudio} />
+        <MiniPlayer
+          isPlaying={isPlaying}
+          onToggle={onToggleAudio}
+          currentSong={currentSong}
+        />
 
         {/* Explore */}
         <div>

@@ -9,16 +9,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import styles from "@/styles/MainPage.module.css";
-import { MUSIC_TITLE, MUSIC_ARTIST } from "@/lib/constants";
+import { Song } from "@/lib/constants";
 
 const EQ_DURATIONS = ["0.2s", "0.45s", "0.15s", "0.5s", "0.3s"];
 
 interface MiniPlayerProps {
   isPlaying: boolean;
   onToggle: () => void;
+  currentSong: Song;
 }
 
-export default function MiniPlayer({ isPlaying, onToggle }: MiniPlayerProps) {
+export default function MiniPlayer({
+  isPlaying,
+  onToggle,
+  currentSong,
+}: MiniPlayerProps) {
   return (
     <div className={styles.miniPlayer} onClick={onToggle}>
       <div className={styles.mpInner}>
@@ -27,8 +32,8 @@ export default function MiniPlayer({ isPlaying, onToggle }: MiniPlayerProps) {
         >
           <div className={styles.mpVinylDot}>
             <Image
-              src="/images/amr diab.jpg"
-              alt="Amr Diab"
+              src={currentSong.cover}
+              alt={currentSong.artist}
               width={20}
               height={20}
               className={styles.mpVinylDotImage}
@@ -36,7 +41,9 @@ export default function MiniPlayer({ isPlaying, onToggle }: MiniPlayerProps) {
           </div>
         </div>
         <div className={styles.mpInfo}>
-          <div className={styles.mpSong}>{MUSIC_TITLE} — {MUSIC_ARTIST}</div>
+          <div className={styles.mpSong}>
+            {currentSong.title} — {currentSong.artist}
+          </div>
           <div className={styles.mpArtist}>
             <FontAwesomeIcon
               icon={faHeadphones}

@@ -3,9 +3,10 @@ import styles from "@/styles/SpotifyPage.module.css";
 
 interface VinylDiscProps {
   spinning?: boolean;
+  cover?: string;
 }
 
-export default function VinylDisc({ spinning = true }: VinylDiscProps) {
+export default function VinylDisc({ spinning = true, cover = "/images/amr diab.jpg" }: VinylDiscProps) {
   return (
     <div className={styles.albumWrap}>
       <div
@@ -14,8 +15,8 @@ export default function VinylDisc({ spinning = true }: VinylDiscProps) {
       >
         <div className={styles.discCenter}>
           <Image
-            src="/images/amr diab.jpg"
-            alt="Amr Diab"
+            src={cover}
+            alt="Cover Art"
             width={60}
             height={60}
             className={styles.discCenterImage}
