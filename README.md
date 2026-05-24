@@ -19,16 +19,18 @@ Website hadiah ulang tahun interaktif dan premium yang dirancang khusus untuk me
 4. 🎂 **Interactive Cake & Candle Blowing**
    - Halaman lilin ulang tahun interaktif. Lilin bisa ditiup (menggunakan klik/interaksi layar) diikuti dengan ledakan efek confetti warna-warni yang meriah.
 5. 📊 **Dashboard Utama Kejutan**
-   - **Hero Grid**: Menampilkan foto utama penerima kejutan dengan efek *3D floating* & *mouse-tilt follow*.
+   - **Hero Grid**: Menampilkan foto utama penerima kejutan dengan efek *3D floating* & *mouse-tilt follow*, serta dukungan klik untuk memperbesar foto (*lightbox overlay*).
    - **Countdown Timer**: Hitung mundur presisi menuju hari ulang tahun berikutnya.
    - **Statistik Hubungan**: Menampilkan angka-angka kebersamaan yang menarik.
    - **Mini Music Player**: Pemutar musik melayang yang dapat dikontrol dari halaman dashboard utama.
-   - **Explore Menu**: Kartu navigasi interaktif untuk membuka surat cinta dan galeri foto.
+   - **Explore Menu**: Kartu navigasi interaktif untuk membuka surat cinta, galeri foto, serta kartu pengiriman surat balik (WhatsApp).
 6. ✉️ **Surat Cinta dengan Typewriter Effect**
    - Surat tulisan tangan digital yang mengetik sendiri secara dramatis lengkap dengan dekorasi bunga melayang.
 7. 🖼️ **Galeri Foto Estetik (Polaroid & Ornate Frame)**
    - Album foto memori dengan rotasi acak dan berbagai variasi bingkai foto (Polaroid, ornate, glass, tape, heart) lengkap dengan fitur pembesar foto (*lightbox overlay*).
-8. ✨ **Aksesoris Visual Premium**
+8. 💬 **Kirim Surat Balik (Direct WhatsApp)**
+   - Tombol khusus di halaman Explore untuk memudahkan penerima mengirimkan surat/pesan balasan langsung ke nomor WhatsApp pengirim dengan teks default yang romantis.
+9. ✨ **Aksesoris Visual Premium**
    - Efek partikel gelembung melayang (*Particle Canvas*).
    - Pengikut kursor mouse melingkar kustom (*Custom Follower Cursor*).
 
@@ -71,7 +73,7 @@ birthday-project/
 │   │       └── ...
 │   ├── hooks/                          ← Custom React Hooks (Audio, Countdown, Typewriter)
 │   ├── lib/
-│   │   ├── constants.ts                ← DATA UTAMA (PIN, Pertanyaan Kuis, Isi Surat, Foto)
+│   │   ├── constants.ts                ← DATA UTAMA (PIN, Pertanyaan Kuis, Isi Surat, Foto, Balasan WA)
 │   │   └── utils.ts
 │   └── styles/                         ← CSS Modules unik untuk masing-masing halaman
 ```
@@ -115,6 +117,7 @@ Buka file `src/lib/constants.ts` dan ubah konstanta berikut:
 * **Detail Musik**: Ubah nama judul `MUSIC_TITLE` dan penyanyi `MUSIC_ARTIST` untuk mempersonalisasi pemutar lagu Spotify.
 * **Pertanyaan Kuis**: Ubah array `QUIZ_QUESTIONS` untuk membuat kuis kustom Anda sendiri.
 * **Isi Surat Cinta**: Ubah string `LETTER_TEXT` (mendukung spasi baru dan emoji) yang akan diketik otomatis.
+* **Pesan Surat Balik (WhatsApp)**: Ubah string `REPLY_TEXT` (default: `"Halo Babe! Aku udah baca surat spesial dari kamu di website..."`) yang dikirim kembali ketika pasangan membalas via WhatsApp.
 * **Album Galeri**: Ubah array `GALLERY_PHOTOS` untuk menyesuaikan path gambar (`src`), deskripsi foto (`caption`), rotasi sudut, dan jenis bingkai (`frame`).
 
 ### 📅 2. Mengubah Target Tanggal Lahir (Countdown & Umur)
@@ -124,11 +127,18 @@ const { days, hours, minutes, seconds, age, isBirthday } = useCountdown("2006-06
 ```
 *Sistem secara otomatis akan menghitung umur penerima sekarang secara berkala, serta melakukan hitung mundur hari ulang tahun berikutnya secara real-time.*
 
-### 🎵 3. Mengganti Musik Background
+### 💬 3. Mengubah Nomor WhatsApp Tujuan Balasan
+Buka file `src/components/pages/MainPage.tsx` dan ubah nomor tujuan WhatsApp di bagian tombol `Kirim Surat Balik` (baris `onClick`):
+```tsx
+const url = `https://wa.me/62816234185?text=${encodeURIComponent(REPLY_TEXT)}`; // Ganti 62816234185 dengan nomor WhatsApp Anda!
+```
+*Pastikan format nomor telepon diawali dengan kode negara tanpa tanda `+` atau karakter lainnya (misal: `628123456789`).*
+
+### 🎵 4. Mengganti Musik Background
 * Masukkan file audio baru Anda ke dalam folder `public/audio/`.
 * Pastikan file tersebut dinamai `background-music.mp3` atau Anda bisa mengganti referensi jalurnya di file `src/components/BirthdayApp.tsx` bagian pemanggilan hook `useAudio`.
 
-### 🖼️ 4. Mengganti Aset Foto & Cover Album
+### 🖼️ 5. Mengganti Aset Foto & Cover Album
 * **Foto Utama**: Ganti file `public/images/sahida.png` dengan foto pasangan/teman Anda yang ingin diberi kejutan.
 * **Cover Piringan Vinyl**: Ganti `public/images/amr diab.jpg` dengan foto cover lagu pilihan Anda.
 * **Foto Album Galeri**: Letakkan foto-foto Anda di folder `public/images/gallery/` dan hubungkan nama fotonya di `src/lib/constants.ts`.
