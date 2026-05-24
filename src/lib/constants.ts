@@ -102,7 +102,7 @@ aku janji akan terus berjuang, belajar jadi orang yang lebih baik lagi buat kamu
 happy birthday, pacarkuhhh yang paling gemesin! 🎉
 i love you more than all the kilometers between us 💕
 
-— athif, yang selalu kangen dan sayang kamu setiap detik nyaa ♡`;
+— athif, yang selalu kangen dan sayang kamu setiap detik nyaaa ♡`;
 
 export const REPLY_TEXT = "Halo Babe! Aku udah baca surat spesial dari kamu di website. Makasih banyak yaa atas ucapan dan kejutannya, aku seneng banget! Love you too 💕";
 
