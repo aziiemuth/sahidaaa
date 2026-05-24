@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { SONGS, Song } from "@/lib/constants";
+import { SONGS } from "@/lib/constants";
 
 export default function useAudio() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,9 +9,14 @@ export default function useAudio() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const currentSong = SONGS[currentIndex];
+  const isPlayingRef = useRef(isPlaying);
 
   useEffect(() => {
-    const wasPlaying = isPlaying;
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  useEffect(() => {
+    const wasPlaying = isPlayingRef.current;
     
     if (audioRef.current) {
       audioRef.current.pause();
@@ -28,7 +33,7 @@ export default function useAudio() {
       audioRef.current?.pause();
       audioRef.current = null;
     };
-  }, [currentIndex]);
+  }, [currentSong.src]);
 
   const play = () => {
     audioRef.current?.play().catch(() => {});
