@@ -12,7 +12,7 @@ import styles from "@/styles/MainPage.module.css";
 import { REPLY_TEXT, Song } from "@/lib/constants";
 
 interface MainPageProps {
-  onOpenSlide: (slide: "letter" | "gallery") => void;
+  onOpenSlide: (slide: "letter" | "gallery" | "game") => void;
   isPlaying: boolean;
   onToggleAudio: () => void;
   currentSong: Song;
@@ -81,11 +81,17 @@ export default function MainPage({
               title="Kirim Surat Balik"
               subtitle="Kirim pesan langsung ke WhatsApp Athif"
               color="green"
-              isFullWidth={true}
               onClick={() => {
                 const url = `https://wa.me/62816234185?text=${encodeURIComponent(REPLY_TEXT)}`;
                 window.open(url, "_blank");
               }}
+            />
+            <NavCard
+              icon="gamepad"
+              title="Tangkap Cinta"
+              subtitle="Main game seru yuk! 🎮"
+              color="orange"
+              onClick={() => onOpenSlide("game")}
             />
           </div>
         </div>

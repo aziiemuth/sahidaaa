@@ -543,6 +543,14 @@
   --nc-clr: rgba(37, 211, 102, 0.1);
 }
 
+.ncIconOrange {
+  background: linear-gradient(135deg, #f39c12, #f1c40f);
+}
+
+.ncGame {
+  --nc-clr: rgba(243, 156, 18, 0.1);
+}
+
 .navCardFull {
   grid-column: span 2;
 }

@@ -11,10 +11,11 @@ import BirthdayPage from "@/components/pages/BirthdayPage";
 import MainPage from "@/components/pages/MainPage";
 import LetterSlide from "@/components/slides/LetterSlide";
 import GallerySlide from "@/components/slides/GallerySlide";
+import GameSlide from "@/components/slides/GameSlide";
 import useAudio from "@/hooks/useAudio";
 
 type Page = "login" | "quiz" | "spotify" | "birthday" | "main";
-type Slide = null | "letter" | "gallery";
+type Slide = null | "letter" | "gallery" | "game";
 
 export default function BirthdayApp() {
   const [currentPage, setCurrentPage] = useState<Page>("login");
@@ -70,6 +71,9 @@ export default function BirthdayApp() {
       )}
       {activeSlide === "gallery" && (
         <GallerySlide onClose={() => setActiveSlide(null)} />
+      )}
+      {activeSlide === "game" && (
+        <GameSlide onClose={() => setActiveSlide(null)} />
       )}
     </>
   );

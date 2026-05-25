@@ -7,6 +7,7 @@ import {
   faArrowUpRightFromSquare,
   faHeartPulse,
   faPaperPlane,
+  faGamepad,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/MainPage.module.css";
 
@@ -14,13 +15,14 @@ const iconMap: Record<string, typeof faEnvelopeOpenText> = {
   envelope: faEnvelopeOpenText,
   images: faImages,
   "paper-plane": faPaperPlane,
+  gamepad: faGamepad,
 };
 
 interface NavCardProps {
   icon: string;
   title: string;
   subtitle: string;
-  color: "pink" | "purple" | "green";
+  color: "pink" | "purple" | "green" | "orange";
   isFullWidth?: boolean;
   onClick: () => void;
 }
@@ -38,6 +40,8 @@ export default function NavCard({
       ? styles.ncLetter
       : color === "purple"
       ? styles.ncGallery
+      : color === "orange"
+      ? styles.ncGame
       : styles.ncWhatsapp;
 
   const iconColorClass =
@@ -45,6 +49,8 @@ export default function NavCard({
       ? styles.ncIconPink
       : color === "purple"
       ? styles.ncIconPurple
+      : color === "orange"
+      ? styles.ncIconOrange
       : styles.ncIconGreen;
 
   return (
