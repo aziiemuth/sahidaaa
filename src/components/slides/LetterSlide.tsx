@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import useTypewriter from "@/hooks/useTypewriter";
 import { LETTER_TEXT } from "@/lib/constants";
 import styles from "@/styles/LetterSlide.module.css";
@@ -11,11 +11,18 @@ interface LetterSlideProps {
 
 export default function LetterSlide({ onClose }: LetterSlideProps) {
   const { displayText, isDone, start } = useTypewriter(LETTER_TEXT, 22);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     start();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView();
+    }
+  }, [displayText]);
 
   return (
     <section className={styles.slide}>
@@ -46,6 +53,8 @@ export default function LetterSlide({ onClose }: LetterSlideProps) {
           </p>
         </div>
       </div>
+      {/* Scroll anchor */}
+      <div ref={bottomRef} />
     </section>
   );
 }
