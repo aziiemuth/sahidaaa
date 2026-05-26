@@ -24,7 +24,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 5;
+  const ITEMS_PER_PAGE = 1;
 
   useEffect(() => {
     const fetchAnswers = async () => {
