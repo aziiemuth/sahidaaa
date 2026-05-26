@@ -10,6 +10,9 @@ import {
   faCamera,
   faCakeCandles,
   faQuestion,
+  faFaceSmile,
+  faUtensils,
+  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { OPTION_LETTERS } from "@/lib/constants";
 import styles from "@/styles/QuizPage.module.css";
@@ -22,6 +25,9 @@ const iconMap: Record<string, typeof faStar> = {
   "fa-moon": faMoon,
   "fa-camera": faCamera,
   "fa-cake-candles": faCakeCandles,
+  "fa-face-smile": faFaceSmile,
+  "fa-utensils": faUtensils,
+  "fa-phone": faPhone,
 };
 
 interface QuizCardProps {

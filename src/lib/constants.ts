@@ -90,6 +90,36 @@ export const QUIZ_QUESTIONS = [
     ],
   },
   {
+    icon: "fa-phone",
+    question: "Kalau lagi kangen tapi LDR, biasanya kamu...",
+    options: [
+      "Spam chat/call sampai diangkat",
+      "Nonton ulang video/foto berdua",
+      "Ngambek kecil biar dibujuk",
+      "Tidur biar kangennya ilang",
+    ],
+  },
+  {
+    icon: "fa-utensils",
+    question: "Makanan yang paling gabisa kamu tolak?",
+    options: [
+      "Seblak / Bakso super pedes",
+      "Camilan manis / Es krim",
+      "Makanan berat nasi padang / mie ayam",
+      "Apapun asal dibayarin Athif",
+    ],
+  },
+  {
+    icon: "fa-face-smile",
+    question: "Apa hal pertama yang kamu perhatikan dari Athif?",
+    options: [
+      "Senyumnya yang manis",
+      "Sifatnya yang ngeselin tapi ngangenin",
+      "Cara dia perhatian ke kamu",
+      "Suara / cara dia ngomong",
+    ],
+  },
+  {
     icon: "fa-cake-candles",
     question: "Saat tiup lilin ulang tahun, kamu biasanya...",
     options: [
