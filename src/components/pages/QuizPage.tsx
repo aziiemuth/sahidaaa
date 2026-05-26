@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faFaceSmileWink } from "@fortawesome/free-solid-svg-icons";
 import { QUIZ_QUESTIONS } from "@/lib/constants";
 import QuizCard from "@/components/ui/QuizCard";
 import QuizResult from "@/components/ui/QuizResult";
 import styles from "@/styles/QuizPage.module.css";
+import { supabase } from "@/lib/supabase";
 
 interface QuizPageProps {
   onComplete: () => void;
@@ -18,11 +19,44 @@ export default function QuizPage({ onComplete }: QuizPageProps) {
   const [showResult, setShowResult] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isExiting, setIsExiting] = useState(false);
+  
+  const sessionIdRef = useRef<string>("");
+  
+  useEffect(() => {
+    // Generate a valid UUID for session ID
+    if (typeof crypto !== "undefined" && crypto.randomUUID) {
+      sessionIdRef.current = crypto.randomUUID();
+    } else {
+      sessionIdRef.current = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+        const r = (Math.random() * 16) | 0;
+        const v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    }
+  }, []);
 
   const handleAnswer = useCallback(
     (index: number) => {
       setSelectedOption(index);
       setScore((prev) => prev + 1);
+
+      // Save answer to Supabase
+      const q = QUIZ_QUESTIONS[currentQ];
+      const answerText = q.options[index];
+      
+      supabase
+        .from("quiz_answers")
+        .insert([
+          {
+            session_id: sessionIdRef.current,
+            question_index: currentQ,
+            question_text: q.question,
+            answer_text: answerText,
+          },
+        ])
+        .then(({ error }) => {
+          if (error) console.error("Error saving answer to Supabase:", error);
+        });
       
       // Wait for user to see the picked option (600ms)
       setTimeout(() => {
