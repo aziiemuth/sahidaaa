@@ -70,6 +70,26 @@ export default function AdminPage() {
     };
   }, []);
 
+  const handleClearData = async () => {
+    const confirmed = window.confirm(
+      "Apakah kamu yakin ingin menghapus semua data kuis dari database?"
+    );
+    if (!confirmed) return;
+
+    const { error } = await supabase
+      .from("quiz_answers")
+      .delete()
+      .neq("id", "00000000-0000-0000-0000-000000000000");
+
+    if (error) {
+      alert("Gagal menghapus data: " + error.message);
+    } else {
+      setAnswers([]);
+      setCurrentPage(1);
+      alert("Semua data berhasil dihapus!");
+    }
+  };
+
   // Group by session
   const sessions = answers.reduce((acc, ans) => {
     const existing = acc.find(s => s.sessionId === ans.session_id);
@@ -118,9 +138,16 @@ export default function AdminPage() {
           <h1 className={styles.title}>Admin Dashboard</h1>
           <p className={styles.subtitle}>Pantau jawaban kuis pacarmu di sini ✨</p>
         </div>
-        <div className={styles.status}>
-          <span className={isConnected ? styles.pulse : ""} style={{ backgroundColor: isConnected ? '#2ecc71' : '#e74c3c' }}></span>
-          {isConnected ? "Live Updates Aktif" : "Menghubungkan..."}
+        <div className={styles.headerControls}>
+          {answers.length > 0 && (
+            <button className={styles.clearBtn} onClick={handleClearData}>
+              🗑️ Hapus Semua Data
+            </button>
+          )}
+          <div className={styles.status}>
+            <span className={isConnected ? styles.pulse : ""} style={{ backgroundColor: isConnected ? '#2ecc71' : '#e74c3c' }}></span>
+            {isConnected ? "Live Updates Aktif" : "Menghubungkan..."}
+          </div>
         </div>
       </header>
 

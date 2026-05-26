@@ -20,6 +20,33 @@
   backdrop-filter: blur(20px);
 }
 
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clearBtn {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clearBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
 .title {
   font-size: 2.2rem;
   font-weight: 800;
@@ -207,6 +234,17 @@
     padding: 1.25rem;
     border-radius: 16px;
     margin-bottom: 2rem;
+  }
+
+  .headerControls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .clearBtn {
+    justify-content: center;
   }
   
   .status {

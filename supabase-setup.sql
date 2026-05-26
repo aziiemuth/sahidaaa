@@ -29,6 +29,12 @@ CREATE POLICY "Allow anonymous selects" ON public.quiz_answers
     TO anon
     USING (true);
 
+-- Allow deleting answers (for clearing DB data from admin dashboard)
+CREATE POLICY "Allow anonymous deletes" ON public.quiz_answers
+    FOR DELETE
+    TO anon
+    USING (true);
+
 -- 4. Enable Realtime updates for the quiz_answers table
 -- This allows our Admin Dashboard to listen to changes instantly.
 BEGIN;
