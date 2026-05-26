@@ -129,6 +129,56 @@ export const QUIZ_QUESTIONS = [
       "Lupa kalau ada lilin (lupa umur)",
     ],
   },
+  {
+    icon: "fa-comments",
+    question: "Topik chat paling seru kalau lagi ngobrol berdua?",
+    options: [
+      "Membahas masa depan kita berdua",
+      "Saling kirim meme / video kocak",
+      "Ghibah seru tentang hal random",
+      "Curhat masalah keseharian masing-masing",
+    ],
+  },
+  {
+    icon: "fa-face-smile-wink",
+    question: "Sifat Athif yang menurutmu paling ngegemesin?",
+    options: [
+      "Pas dia lagi manja / kangen",
+      "Pas dia berusaha bikin kamu ketawa",
+      "Pas dia panik kalau kamu ngambek",
+      "Semuanya! Gak ada yang terlewat",
+    ],
+  },
+  {
+    icon: "fa-heart-pulse",
+    question: "Momen tersweet yang pernah kamu alami sama Athif?",
+    options: [
+      "Dapat surprise hadiah tak terduga",
+      "Ditemenin telfon sampai ketiduran",
+      "Kata-kata penyemangat pas lagi capek",
+      "Setiap detik waktu yang dihabisin bareng",
+    ],
+  },
+  {
+    icon: "fa-gamepad",
+    question: "Kegiatan yang paling kamu pengen lakuin bareng pas ketemu?",
+    options: [
+      "Keliling kota naik motor sore-sore",
+      "Masak makanan favorit berdua",
+      "Nonton bioskop / Netflix maraton",
+      "Deep talk sambil makan es krim",
+    ],
+  },
+  {
+    icon: "fa-hourglass-half",
+    question: "Seberapa sabar kamu LDR-an sama Athif?",
+    options: [
+      "Sabar banget dong, demi masa depan",
+      "Kadang rewel dikit tapi tetep bertahan",
+      "Yang penting telfon terus tiap hari",
+      "1000% sabar tiada batas",
+    ],
+  },
 ];
 
 export const RESULT_COMMENTS = [

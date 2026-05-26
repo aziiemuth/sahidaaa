@@ -13,6 +13,11 @@ import {
   faFaceSmile,
   faUtensils,
   faPhone,
+  faComments,
+  faFaceSmileWink,
+  faHeartPulse,
+  faGamepad,
+  faHourglassHalf,
 } from "@fortawesome/free-solid-svg-icons";
 import { OPTION_LETTERS } from "@/lib/constants";
 import styles from "@/styles/QuizPage.module.css";
@@ -28,6 +33,11 @@ const iconMap: Record<string, typeof faStar> = {
   "fa-face-smile": faFaceSmile,
   "fa-utensils": faUtensils,
   "fa-phone": faPhone,
+  "fa-comments": faComments,
+  "fa-face-smile-wink": faFaceSmileWink,
+  "fa-heart-pulse": faHeartPulse,
+  "fa-gamepad": faGamepad,
+  "fa-hourglass-half": faHourglassHalf,
 };
 
 interface QuizCardProps {
