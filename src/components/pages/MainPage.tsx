@@ -43,7 +43,6 @@ export default function MainPage({
 
         {/* Hero Grid */}
         <HeroGrid
-          imageSrc="/images/sahida.png"
           name="Sahida"
           countdown={{ days, hours, minutes, seconds, isBirthday }}
         />

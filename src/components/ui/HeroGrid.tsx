@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,7 +14,6 @@ import styles from "@/styles/MainPage.module.css";
 import Lightbox from "@/components/ui/Lightbox";
 
 interface HeroGridProps {
-  imageSrc: string;
   name: string;
   countdown: {
     days: number;
@@ -25,26 +24,43 @@ interface HeroGridProps {
   };
 }
 
+const HERO_IMAGES = [
+  "/images/sahida.png",
+  "/images/sahida2.png",
+  "/images/sahida3.png",
+  "/images/sahida4.jpg",
+];
+
 export default function HeroGrid({
-  imageSrc,
   name,
   countdown,
 }: HeroGridProps) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showLightbox, setShowLightbox] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 4000); // Ganti foto setiap 4 detik
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <>
       <div className={styles.heroGrid}>
         <div className={styles.heroMedia}>
           <div className={styles.heroMediaInner} onClick={() => setShowLightbox(true)}>
-            <Image
-              src={imageSrc}
-              alt={`Foto ${name}`}
-              width={220}
-              height={220}
-              className={styles.heroImage}
-              priority
-            />
+            {HERO_IMAGES.map((src, index) => (
+              <Image
+                key={src}
+                src={src}
+                alt={`Foto ${name} ${index + 1}`}
+                width={220}
+                height={220}
+                className={`${styles.heroImage} ${index === currentImageIndex ? styles.activeImage : ""}`}
+                priority={index === 0}
+              />
+            ))}
           </div>
         </div>
       <div className={styles.heroInfo}>
@@ -86,7 +102,7 @@ export default function HeroGrid({
       </div>
     </div>
     {showLightbox && (
-      <Lightbox src={imageSrc} onClose={() => setShowLightbox(false)} />
+      <Lightbox src={HERO_IMAGES[currentImageIndex]} onClose={() => setShowLightbox(false)} />
     )}
     </>
   );
