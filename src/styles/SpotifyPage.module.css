@@ -200,6 +200,84 @@
   color: var(--text);
 }
 
+.distractingBtn {
+  color: var(--pri) !important;
+  font-size: 1.3rem !important;
+  animation: distract-wiggle 1.5s infinite ease-in-out;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.distractingBtn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  background: rgba(224, 90, 158, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: distract-pulse 1.5s infinite ease-in-out;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.changeSongHint {
+  font-size: 0.72rem;
+  color: var(--pri-mid);
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+  animation: pulse-hint 2s infinite ease-in-out;
+  font-weight: 500;
+}
+
+@keyframes distract-wiggle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  15% {
+    transform: scale(1.25) rotate(-12deg);
+  }
+  30% {
+    transform: scale(1.25) rotate(12deg);
+  }
+  45% {
+    transform: scale(1.25) rotate(-10deg);
+  }
+  60% {
+    transform: scale(1.25) rotate(10deg);
+  }
+  75% {
+    transform: scale(1.15) rotate(0deg);
+  }
+}
+
+@keyframes distract-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-hint {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+}
+
+
 .playBtn {
   width: 50px;
   height: 50px;

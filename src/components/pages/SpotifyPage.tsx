@@ -87,13 +87,17 @@ export default function SpotifyPage({
         <button className={styles.playBtn} onClick={onToggleAudio}>
           <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
         </button>
-        <button className={styles.ctrlBtn} onClick={onNextSong}>
+        <button className={`${styles.ctrlBtn} ${styles.distractingBtn}`} onClick={onNextSong} title="Ganti Lagu">
           <FontAwesomeIcon icon={faForwardStep} />
         </button>
         <button className={styles.ctrlBtn}>
           <FontAwesomeIcon icon={faRepeat} />
         </button>
       </div>
+
+      <p className={styles.changeSongHint}>
+        ✨ Coba klik tombol pink yang bergetar untuk ganti lagunya ya! Ada lagu romantis lainnya! 😉
+      </p>
 
       {/* Timeline */}
       <div className={styles.timeline}>
