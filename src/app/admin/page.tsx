@@ -147,11 +147,23 @@ export default function AdminPage() {
         lastUpdate: new Date(0),
       };
     }
-    sessionMap[ans.session_id].answers.push(ans);
+    
+    const session = sessionMap[ans.session_id];
+    
+    // Check for duplicate answers (happens if user refreshes the page and restarts quiz)
+    const existingIndex = session.answers.findIndex(a => a.question_index === ans.question_index);
+    if (existingIndex === -1) {
+      session.answers.push(ans);
+    } else {
+      // Keep the newest answer for this question
+      if (new Date(ans.created_at) > new Date(session.answers[existingIndex].created_at)) {
+        session.answers[existingIndex] = ans;
+      }
+    }
     
     const ansDate = new Date(ans.created_at);
-    if (ansDate > sessionMap[ans.session_id].lastUpdate) {
-      sessionMap[ans.session_id].lastUpdate = ansDate;
+    if (ansDate > session.lastUpdate) {
+      session.lastUpdate = ansDate;
     }
   });
 
