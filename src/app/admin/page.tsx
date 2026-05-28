@@ -135,25 +135,43 @@ export default function AdminPage() {
     }
   };
 
-  // Group by session
-  const sessions = answers.reduce((acc, ans) => {
-    const existing = acc.find(s => s.sessionId === ans.session_id);
-    if (existing) {
-      existing.answers.push(ans);
-      // Update lastUpdate if this answer is newer
-      const ansDate = new Date(ans.created_at);
-      if (ansDate > existing.lastUpdate) {
-        existing.lastUpdate = ansDate;
-      }
-    } else {
-      acc.push({
+  // Group by session using both answers and locations
+  const sessionMap: Record<string, GroupedSession> = {};
+
+  // 1. Group answers
+  answers.forEach((ans) => {
+    if (!sessionMap[ans.session_id]) {
+      sessionMap[ans.session_id] = {
         sessionId: ans.session_id,
-        answers: [ans],
-        lastUpdate: new Date(ans.created_at)
-      });
+        answers: [],
+        lastUpdate: new Date(0),
+      };
     }
-    return acc;
-  }, [] as GroupedSession[]);
+    sessionMap[ans.session_id].answers.push(ans);
+    
+    const ansDate = new Date(ans.created_at);
+    if (ansDate > sessionMap[ans.session_id].lastUpdate) {
+      sessionMap[ans.session_id].lastUpdate = ansDate;
+    }
+  });
+
+  // 2. Add locations to sessions (or create new sessions if they only have location)
+  Object.values(locations).forEach((loc) => {
+    if (!sessionMap[loc.session_id]) {
+      sessionMap[loc.session_id] = {
+        sessionId: loc.session_id,
+        answers: [],
+        lastUpdate: new Date(loc.updated_at || 0),
+      };
+    } else {
+      const locDate = new Date(loc.updated_at || 0);
+      if (locDate > sessionMap[loc.session_id].lastUpdate) {
+        sessionMap[loc.session_id].lastUpdate = locDate;
+      }
+    }
+  });
+
+  const sessions = Object.values(sessionMap);
 
   // Sort sessions by last update time (newest first), and sort answers within each session by question_index
   sessions.sort((a, b) => b.lastUpdate.getTime() - a.lastUpdate.getTime());
