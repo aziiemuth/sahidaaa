@@ -13,6 +13,13 @@ interface QuizAnswer {
   created_at: string;
 }
 
+interface UserLocation {
+  session_id: string;
+  latitude: number;
+  longitude: number;
+  updated_at: string;
+}
+
 interface GroupedSession {
   sessionId: string;
   answers: QuizAnswer[];
@@ -21,6 +28,7 @@ interface GroupedSession {
 
 export default function AdminPage() {
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
+  const [locations, setLocations] = useState<Record<string, UserLocation>>({});
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +46,21 @@ export default function AdminPage() {
       } else {
         setAnswers(data || []);
       }
+      
+      const { data: locData, error: locError } = await supabase
+        .from("user_locations")
+        .select("*");
+        
+      if (locError) {
+        console.error("Error fetching locations:", locError);
+      } else if (locData) {
+        const locMap: Record<string, UserLocation> = {};
+        locData.forEach(loc => {
+          locMap[loc.session_id] = loc;
+        });
+        setLocations(locMap);
+      }
+
       setLoading(false);
     };
 
@@ -65,8 +88,27 @@ export default function AdminPage() {
         }
       });
 
+    const locChannel = supabase
+      .channel("user_locations_changes")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "user_locations",
+        },
+        (payload) => {
+          const newLoc = payload.new as UserLocation;
+          if (newLoc.session_id) {
+            setLocations((prev) => ({ ...prev, [newLoc.session_id]: newLoc }));
+          }
+        }
+      )
+      .subscribe();
+
     return () => {
       supabase.removeChannel(channel);
+      supabase.removeChannel(locChannel);
     };
   }, []);
 
@@ -82,9 +124,12 @@ export default function AdminPage() {
       .neq("id", "00000000-0000-0000-0000-000000000000");
 
     if (error) {
-      alert("Gagal menghapus data: " + error.message);
+      alert("Gagal menghapus data kuis: " + error.message);
     } else {
+      // Also delete locations
+      await supabase.from("user_locations").delete().neq("session_id", "00000000-0000-0000-0000-000000000000");
       setAnswers([]);
+      setLocations({});
       setCurrentPage(1);
       alert("Semua data berhasil dihapus!");
     }
@@ -164,13 +209,26 @@ export default function AdminPage() {
               // Find global index for the session number
               const sessionIndex = sessions.findIndex(s => s.sessionId === session.sessionId);
               const sessionNumber = sessions.length - sessionIndex;
+              const loc = locations[session.sessionId];
               return (
                 <div key={session.sessionId} className={styles.sessionCard}>
-                  <div className={styles.sessionHeader}>
-                    <h2 className={styles.sessionTitle}>Sesi #{sessionNumber}</h2>
-                    <span className={styles.sessionTime}>
-                      Update terakhir: {session.lastUpdate.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                    </span>
+                  <div className={styles.sessionHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <h2 className={styles.sessionTitle}>Sesi #{sessionNumber}</h2>
+                      <span className={styles.sessionTime}>
+                        Update terakhir: {session.lastUpdate.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                      </span>
+                    </div>
+                    {loc && (
+                      <a 
+                        href={`https://www.google.com/maps?q=${loc.latitude},${loc.longitude}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ backgroundColor: '#e74c3c', color: 'white', padding: '6px 12px', borderRadius: '8px', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '5px' }}
+                      >
+                        📍 Lokasi
+                      </a>
+                    )}
                   </div>
                   <div className={styles.sessionBody}>
                     {session.answers.map((answer) => (

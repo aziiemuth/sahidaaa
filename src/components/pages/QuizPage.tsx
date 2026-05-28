@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
+import { useSession } from "@/hooks/useSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faFaceSmileWink } from "@fortawesome/free-solid-svg-icons";
 import { QUIZ_QUESTIONS } from "@/lib/constants";
@@ -20,20 +21,14 @@ export default function QuizPage({ onComplete }: QuizPageProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isExiting, setIsExiting] = useState(false);
   
+  const sessionId = useSession();
   const sessionIdRef = useRef<string>("");
   
   useEffect(() => {
-    // Generate a valid UUID for session ID
-    if (typeof crypto !== "undefined" && crypto.randomUUID) {
-      sessionIdRef.current = crypto.randomUUID();
-    } else {
-      sessionIdRef.current = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-        const r = (Math.random() * 16) | 0;
-        const v = c === 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      });
+    if (sessionId) {
+      sessionIdRef.current = sessionId;
     }
-  }, []);
+  }, [sessionId]);
 
   const handleAnswer = useCallback(
     (index: number) => {

