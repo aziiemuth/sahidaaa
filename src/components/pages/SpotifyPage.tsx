@@ -95,9 +95,7 @@ export default function SpotifyPage({
         </button>
       </div>
 
-      <p className={styles.changeSongHint}>
-        ✨ Coba klik tombol pink yang bergetar untuk ganti lagunya ya! Ada lagu romantis lainnya! 😉
-      </p>
+
 
       {/* Timeline */}
       <div className={styles.timeline}>
