@@ -2,8 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+  faTrashCan, 
+  faMapMarkerAlt, 
+  faChevronLeft, 
+  faChevronRight,
+  faCircle,
+  faReply,
+  faBoxOpen,
+  faChartLine
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/AdminPage.module.css";
-
 interface QuizAnswer {
   id: string;
   session_id: string;
@@ -211,16 +221,23 @@ export default function AdminPage() {
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}>Admin Dashboard</h1>
-          <p className={styles.subtitle}>Pantau jawaban kuis pacarmu di sini ✨</p>
+          <p className={styles.subtitle}>
+            <FontAwesomeIcon icon={faChartLine} style={{ marginRight: '8px', color: '#f472b6' }} />
+            Pantau jawaban kuis pacarmu di sini
+          </p>
         </div>
         <div className={styles.headerControls}>
           {answers.length > 0 && (
             <button className={styles.clearBtn} onClick={handleClearData}>
-              🗑️ Hapus Semua Data
+              <FontAwesomeIcon icon={faTrashCan} /> Hapus Semua Data
             </button>
           )}
           <div className={styles.status}>
-            <span className={isConnected ? styles.pulse : ""} style={{ backgroundColor: isConnected ? '#2ecc71' : '#e74c3c' }}></span>
+            <FontAwesomeIcon 
+              icon={faCircle} 
+              className={isConnected ? styles.pulseIcon : ""} 
+              style={{ color: isConnected ? '#2ecc71' : '#e74c3c', fontSize: '12px' }} 
+            />
             {isConnected ? "Live Updates Aktif" : "Menghubungkan..."}
           </div>
         </div>
@@ -228,7 +245,9 @@ export default function AdminPage() {
 
       {sessions.length === 0 ? (
         <div className={styles.emptyState}>
-          <div className={styles.emptyEmoji}>📭</div>
+          <div className={styles.emptyEmoji}>
+            <FontAwesomeIcon icon={faBoxOpen} />
+          </div>
           <p className={styles.emptyText}>Belum ada jawaban yang masuk nih.</p>
           <p className={styles.emptyText} style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>Tunggu dia ngisi ya!</p>
         </div>
@@ -254,9 +273,11 @@ export default function AdminPage() {
                         href={`https://www.google.com/maps?q=${loc.latitude},${loc.longitude}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ backgroundColor: '#e74c3c', color: 'white', padding: '6px 12px', borderRadius: '8px', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '5px' }}
+                        style={{ backgroundColor: '#e74c3c', color: 'white', padding: '8px 16px', borderRadius: '12px', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 12px rgba(231, 76, 60, 0.3)', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
+                        onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(231, 76, 60, 0.4)'; }}
+                        onMouseOut={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(231, 76, 60, 0.3)'; }}
                       >
-                        📍 Lokasi
+                        <FontAwesomeIcon icon={faMapMarkerAlt} /> Lokasi
                       </a>
                     )}
                   </div>
@@ -268,7 +289,9 @@ export default function AdminPage() {
                           <span className={styles.qText}>{answer.question_text}</span>
                         </div>
                         <div className={styles.answerSection}>
-                          <span className={styles.aArrow}>↳</span>
+                          <span className={styles.aArrow}>
+                            <FontAwesomeIcon icon={faReply} rotation={180} />
+                          </span>
                           <span className={styles.aText}>{answer.answer_text}</span>
                         </div>
                       </div>
@@ -286,7 +309,7 @@ export default function AdminPage() {
                 disabled={currentPage === 1}
                 className={styles.pageBtn}
               >
-                Sebelumnya
+                <FontAwesomeIcon icon={faChevronLeft} style={{ marginRight: '8px' }} /> Sebelumnya
               </button>
               <span className={styles.pageInfo}>
                 Halaman {currentPage} dari {totalPages}
@@ -296,7 +319,7 @@ export default function AdminPage() {
                 disabled={currentPage === totalPages}
                 className={styles.pageBtn}
               >
-                Berikutnya
+                Berikutnya <FontAwesomeIcon icon={faChevronRight} style={{ marginLeft: '8px' }} />
               </button>
             </div>
           )}
