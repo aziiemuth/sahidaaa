@@ -37,29 +37,46 @@ export default function BirthdayApp() {
       return;
     }
 
-    const watchId = navigator.geolocation.watchPosition(
-      (position) => {
-        setLocationState("granted");
-        
-        // Save to Supabase
-        supabase.from("user_locations").upsert({
-          session_id: sessionId,
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          updated_at: new Date().toISOString()
-        }).then(({ error }) => {
-          if (error) console.error("Error upserting location:", error);
-        });
-      },
-      (error) => {
-        console.error("Location error:", error);
-        setLocationState("denied");
-      },
-      { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 }
-    );
+    let isMounted = true;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const getLocation = () => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          if (!isMounted) return;
+          setLocationState("granted");
+          
+          // Save to Supabase
+          supabase.from("user_locations").upsert({
+            session_id: sessionId,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            updated_at: new Date().toISOString()
+          }).then(({ error }) => {
+            if (error) console.error("Error upserting location:", error);
+          });
+        },
+        (error) => {
+          if (!isMounted) return;
+          console.error("Location error:", error);
+          // code 1 is PERMISSION_DENIED
+          // Only set to denied if the user explicitly blocks it.
+          if (error.code === 1) {
+            setLocationState("denied");
+          } else {
+            // Retry after 3 seconds for timeout or position unavailable
+            timeoutId = setTimeout(getLocation, 3000);
+          }
+        },
+        { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 }
+      );
+    };
+
+    getLocation();
 
     return () => {
-      navigator.geolocation.clearWatch(watchId);
+      isMounted = false;
+      clearTimeout(timeoutId);
     };
   }, [sessionId]);
 
