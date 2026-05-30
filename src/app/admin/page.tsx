@@ -14,6 +14,7 @@ import {
   faChartLine
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/AdminPage.module.css";
+import Swal from "sweetalert2";
 interface QuizAnswer {
   id: string;
   session_id: string;
@@ -123,10 +124,29 @@ export default function AdminPage() {
   }, []);
 
   const handleClearData = async () => {
-    const confirmed = window.confirm(
-      "Apakah kamu yakin ingin menghapus semua data kuis dari database?"
-    );
-    if (!confirmed) return;
+    const result = await Swal.fire({
+      title: "Hapus Semua Data?",
+      text: "Semua jawaban kuis dan lokasi akan dihapus selamanya!",
+      icon: "warning",
+      iconColor: "#f43f5e",
+      showCancelButton: true,
+      confirmButtonText: "Ya, Hapus",
+      cancelButtonText: "Batal",
+      background: "rgba(15, 23, 42, 0.95)",
+      color: "#f3f4f6",
+      width: "340px",
+      padding: "1.5rem",
+      customClass: {
+        popup: styles.swalPopup,
+        title: styles.swalTitle,
+        htmlContainer: styles.swalText,
+        confirmButton: styles.swalConfirmBtn,
+        cancelButton: styles.swalCancelBtn,
+      },
+      buttonsStyling: false,
+    });
+
+    if (!result.isConfirmed) return;
 
     const { error } = await supabase
       .from("quiz_answers")
@@ -134,14 +154,49 @@ export default function AdminPage() {
       .neq("id", "00000000-0000-0000-0000-000000000000");
 
     if (error) {
-      alert("Gagal menghapus data kuis: " + error.message);
+      Swal.fire({
+        title: "Gagal!",
+        text: "Gagal menghapus data kuis: " + error.message,
+        icon: "error",
+        iconColor: "#ef4444",
+        confirmButtonText: "OK",
+        background: "rgba(15, 23, 42, 0.95)",
+        color: "#f3f4f6",
+        width: "320px",
+        padding: "1.25rem",
+        customClass: {
+          popup: styles.swalPopup,
+          title: styles.swalTitle,
+          htmlContainer: styles.swalText,
+          confirmButton: styles.swalConfirmBtn,
+        },
+        buttonsStyling: false,
+      });
     } else {
       // Also delete locations
       await supabase.from("user_locations").delete().neq("session_id", "00000000-0000-0000-0000-000000000000");
       setAnswers([]);
       setLocations({});
       setCurrentPage(1);
-      alert("Semua data berhasil dihapus!");
+      
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Semua data berhasil dihapus!",
+        icon: "success",
+        iconColor: "#10b981",
+        confirmButtonText: "Bagus",
+        background: "rgba(15, 23, 42, 0.95)",
+        color: "#f3f4f6",
+        width: "320px",
+        padding: "1.25rem",
+        customClass: {
+          popup: styles.swalPopup,
+          title: styles.swalTitle,
+          htmlContainer: styles.swalText,
+          confirmButton: styles.swalConfirmBtn,
+        },
+        buttonsStyling: false,
+      });
     }
   };
 
